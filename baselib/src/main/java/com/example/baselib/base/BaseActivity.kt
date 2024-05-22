@@ -55,4 +55,11 @@ abstract class BaseActivity<M : BaseModel<*, *>, VB : ViewBinding> : AppCompatAc
     open fun initEvent() {
 
     }
+
+    override fun onDestroy() {
+        if (::mViewModel.isInitialized){
+            mViewModel.cancelAllJob()
+        }
+        super.onDestroy()
+    }
 }

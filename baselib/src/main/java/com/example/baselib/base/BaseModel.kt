@@ -6,6 +6,7 @@ import com.example.baselib.utils.GenericsUtil
 import com.example.baselib.utils.ToastUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
  */
 open class BaseModel<Repository : BaseRepository, V : BaseView> {
     protected lateinit var mView: V
+    protected val jobList = mutableListOf<Job>()
 
     val repository: Repository by lazy {
         return@lazy GenericsUtil.getInstant(this)
@@ -21,6 +23,18 @@ open class BaseModel<Repository : BaseRepository, V : BaseView> {
 
     fun attachView(view: V) {
         mView = view
+    }
+
+    fun cancelAllJob() {
+        if (jobList.isEmpty()) {
+            return
+        }
+        jobList.forEach {
+            if (it.isActive) {
+                it.cancel()
+            }
+        }
+        jobList.clear()
     }
 
     fun <T> launchApiCall(
@@ -41,7 +55,7 @@ open class BaseModel<Repository : BaseRepository, V : BaseView> {
 
            如果不明白，可以查阅关于调度器（Dispatchers）的使用
          */
-        CoroutineScope(Dispatchers.IO).launch {
+        val job = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = apiCall()
                 if (response.errorCode == HttpsConstant.NET_SUCCESS) {
@@ -57,6 +71,10 @@ open class BaseModel<Repository : BaseRepository, V : BaseView> {
                 exceptionCallBack()
 
             }
+        }
+
+        if (job.isActive) {
+            jobList.add(job)
         }
 
     }
