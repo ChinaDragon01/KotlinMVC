@@ -19,7 +19,7 @@
 >- api
    >[玩Android 开放API](api%E5%9C%B0%E5%9D%80%20https://www.wanandroid.com/blog/show/2)
 >- Gradle依赖统一版本管理
-   >[Version Catalog](https://docs.gradle.org/7.0/release-notes.html?_gl=1*qftx0d*_ga*MTc4MDM5NzEyNi4xNjkxMTk4OTA5*_ga_7W7NC6YNPT*MTcxNTkzMTU5Ny4xOS4xLjE3MTU5MzM1NDUuMS4wLjA.)
+   >[Version Catalog](https://docs.gradle.org/7.0/release-notes.html)
    >[TOML官网](https://toml.io/en/)
 >- KSP
    >[从 kapt 迁移到 KSP](https://developer.android.com/build/migrate-to-ksp?hl=zh-cn)
