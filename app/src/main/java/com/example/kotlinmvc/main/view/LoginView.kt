@@ -12,5 +12,4 @@ import com.example.baselib.bean.WXArticleBean
 interface LoginView : BaseView {
     fun loginSuccess(userInfoBean: UserInfoBean)
     fun loginFail(apiErrorInfo: ApiErrorInfo)
-    fun wxArticelSuccess(wxArticleBeanList: List<WXArticleBean>)
 }

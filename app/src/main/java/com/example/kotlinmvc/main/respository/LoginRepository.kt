@@ -14,8 +14,4 @@ class LoginRepository : BaseRepository() {
     suspend fun login(parm: Map<String, Any>): ApiResponse<UserInfoBean?> {
         return apiCall { apiService.login(parm) }
     }
-
-    suspend fun wxArticle(): ApiResponse<List<WXArticleBean>> {
-        return apiCall { apiService.wxArticle() }
-    }
 }

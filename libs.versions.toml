@@ -50,7 +50,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVer
 
 [bundles]
 junitTest = ["test-ext-junit", "espresso-core"]
-baseLibs = ["androidx-core-ktx", "androidx-appcompat", "androidx-material"]
+baseLibs = ["androidx-core-ktx", "androidx-appcompat", "androidx-material", "androidx-swiperefreshlayout"]
 
 [plugins]
 

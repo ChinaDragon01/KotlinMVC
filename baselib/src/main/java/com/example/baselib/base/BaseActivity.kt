@@ -19,6 +19,7 @@ abstract class BaseActivity<M : BaseModel<*, *>, VB : ViewBinding> : AppCompatAc
         initViewModel()
         initData()
         initView(savedInstanceState)
+        loadData()
         initEvent()
     }
 

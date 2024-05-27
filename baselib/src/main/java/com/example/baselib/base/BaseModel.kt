@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  *Author: chinadragon
@@ -58,18 +59,22 @@ open class BaseModel<Repository : BaseRepository, V : BaseView> {
         val job = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = apiCall()
-                if (response.errorCode == HttpsConstant.NET_SUCCESS) {
-                    successCallBack(response)
+                withContext(Dispatchers.Main){
+                    if (response.errorCode == HttpsConstant.NET_SUCCESS) {
+                        successCallBack(response)
 
-                } else {
-                    errorCallBack(response)
-                    if (showToast) {
-                        ToastUtil.show(response.errorMsg)
+                    } else {
+                        errorCallBack(response)
+                        if (showToast) {
+                            ToastUtil.show(response.errorMsg)
+                        }
                     }
                 }
-            } catch (e: Exception) {
-                exceptionCallBack()
 
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main){
+                    exceptionCallBack()
+                }
             }
         }
 
