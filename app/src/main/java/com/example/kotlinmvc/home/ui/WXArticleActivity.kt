@@ -48,6 +48,7 @@ class WXArticleActivity : BaseActivity<WXArticleModel, ActivityWxarticleBinding>
 
         binding.tvLogin.setOnClickListener(NoMultiClickListener {
             startActivity(Intent(this@WXArticleActivity, LoginActivity::class.java))
+            finish()
         })
     }
 
