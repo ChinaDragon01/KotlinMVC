@@ -46,13 +46,14 @@ open class BaseModel<Repository : BaseRepository, V : BaseView> {
         showToast: Boolean = true,
     ) {
         /*
-           注意：BaseRepository 里的 apiCall 里面 使用了withContext(Dispatchers.IO)
+           注意：
+           如果BaseRepository 里的 apiCall 里面 使用了withContext(Dispatchers.IO)
            所以CoroutineScope的 context 可以指定为Dispatchers.Unconfined
 
            如果 BaseRepository 里的 apiCall 里面 没有使用withContext(Dispatchers.IO)
            那么CoroutineScope的 context 需要指定为Dispatchers.IO
 
-           建议指定为 Dispatchers.IO
+           这里指定为 Dispatchers.IO
 
            如果不明白，可以查阅关于调度器（Dispatchers）的使用
          */
